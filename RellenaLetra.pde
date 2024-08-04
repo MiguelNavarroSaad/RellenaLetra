@@ -17,6 +17,9 @@
           Las letras las hice con GIMP. lienzo: 1000x800 px;
           fuente: Segoe UI Heavy 700 px;
           utilicé Imagen > Líneas guías vertical (50%), horizontal (75%)
+                  Escribir la letra y alinearla horizontalmente y centrarla
+                    verticalmente
+                  Imagen > Aplanar la imagen
                   Capa > Transparencia > Añadir canal alfa
                   Seleccionar > Por color (selecioné la letra)
                   Editar > Cortar
@@ -26,9 +29,10 @@
 float diametro;
 float x0[] = {0, 0, 0, 0, 0, 0, 0};
 float y0;
-float rojo[] = {255, 255, 255, 0, 0, 75, 159};
-float verde[] = {0, 127, 255, 255, 0, 0, 0};
-float azul[] = {0, 0, 0, 0, 255, 130, 255};
+
+color miColor[] = {color(255, 0, 0), color(255, 127, 0), color(255, 255, 0),
+                 color(0, 255, 0), color(0, 0, 255), color(75, 0, 130),
+                 color(159, 0, 255)};
 float r[] = {0, 0, 0, 0, 0, 0, 0};
 float x, y;
 float r_cambiaXY;
@@ -79,9 +83,9 @@ void draw() {
   if (r_cambiaXY < diametro/2 && mousePressed) cambia = !cambia;
   if (!cambia) {
     minuscula.beginDraw();
-  minuscula.pushMatrix(); minuscula.translate(0, 0); minuscula.scale(0.5); // ojo
-    minuscula.image(miletra, 0, 0);
-  minuscula.popMatrix();
+    minuscula.pushMatrix(); minuscula.translate(0, 0); minuscula.scale(0.5); // ojo
+      minuscula.image(miletra, 0, 0);
+    minuscula.popMatrix();
     minuscula.endDraw();
     boton(minuscula, "May\u00fascula");
     image(minuscula, 0, 0);
@@ -89,9 +93,9 @@ void draw() {
   }
   else {
     Mayuscula.beginDraw();
-  Mayuscula.pushMatrix(); Mayuscula.translate(0, 0); Mayuscula.scale(0.5); // ojo
-    Mayuscula.image(miLetra, 0, 0);
-  Mayuscula.popMatrix();
+    Mayuscula.pushMatrix(); Mayuscula.translate(0, 0); Mayuscula.scale(0.5); // ojo
+      Mayuscula.image(miLetra, 0, 0);
+    Mayuscula.popMatrix();
     Mayuscula.endDraw();
     boton(Mayuscula, "min\u00fascula");
     image(Mayuscula, 0, 0);
@@ -104,7 +108,7 @@ void crea(PGraphics pagina) {
   pagina.background(255, 255, 255);
   pagina.noStroke();
   for (int indice = 0; indice < 7; indice++) {
-    pagina.fill(rojo[indice], verde[indice], azul[indice]);
+    pagina.fill(miColor[indice]);
     pagina.circle(x0[indice], y0, diametro);
   }
   pagina.endDraw();
@@ -130,7 +134,7 @@ void colorea(PGraphics pagina) {
       r[indice] =  sqrt((x-x0[indice])*(x-x0[indice]) + (y-y0)*(y-y0));
       if (r[indice] < diametro/2) {
         pagina.beginDraw();
-        pagina.stroke(rojo[indice], verde[indice], azul[indice]);
+        pagina.stroke(miColor[indice]);
         pagina.strokeWeight(25);
         pagina.endDraw();
       }
