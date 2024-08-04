@@ -1,6 +1,6 @@
 # Rellena letra de la A a la z
 
-![](RellenaLetra.jpg=250x250)
+<img src="RellenaLetra.jpg" width="50" height="50">
 
 Al iniciarse el programa escoge una letra, muestra la mayúscula
 con opciones de selección de color para el relleno al mover el
